@@ -8,7 +8,7 @@ def seeds():
     db.session.add(data)
     db.session.commit()
     db.session.refresh(data)
-    addr=Address(city='Kazan', ulica='Lenina', user_id=data.id)
+    addr = Address(city='Kazan', ulica='Lenina', user_id=data.id)
     addr2 = Address(city='Voronezh', ulica='Kosmonavtov', user_id=data.id)
     db.session.add(addr)
     db.session.add(addr2)

@@ -92,7 +92,7 @@ def user_reg():
 @app.route('/tovar_add', methods=['GET', 'POST'])
 @login_required
 def tovar_add():
-    flash(current_user.name)
+    # flash(current_user.name)
     form = TovarForm()
     print('Func add work')
     if form.validate_on_submit():
