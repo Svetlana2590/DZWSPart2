@@ -1,4 +1,6 @@
-from models import User, Tovar, Address
+from itertools import product
+
+from models import User, Tovar, Address, Categories
 from main import db
 
 
@@ -14,10 +16,13 @@ def seeds():
     db.session.add(addr2)
     db.session.commit()
 
+    categ = Categories(product_type='Одежда', appointment='спортивная', brand='NIKE')
+    db.session.add(categ)
+    db.session.commit()
 
-    data4 = Tovar(name="Костюм", price=50, ostatok=20, url_photo="111.jpg")
-    data5 = Tovar(name="Брюки", price=150, ostatok=14, url_photo="111.jpg")
-    data6 = Tovar(name="Рубашка", price=250, ostatok=10, url_photo="111.jpg")
+    data4 = Tovar(name="Костюм", price=50, ostatok=20, category=categ, url_photo="111.jpg")
+    data5 = Tovar(name="Брюки", price=150, ostatok=14, category=categ, url_photo="111.jpg")
+    data6 = Tovar(name="Рубашка", price=250, ostatok=10, category=categ, url_photo="111.jpg")
 
 
 

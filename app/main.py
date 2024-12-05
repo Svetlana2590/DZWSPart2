@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 
-from models import User, Tovar, load_user
+from models import User, Tovar, load_user, Categories
 
 korzina = []
 
