@@ -1,7 +1,10 @@
 import sqlalchemy as sa
+from sqlalchemy.orm import relationship
 from main import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
+
 
 
 @login_manager.user_loader
@@ -34,6 +37,16 @@ class Address(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
+class Categories(db.Model):
+    __tablename__ = 'categories'
+    id = sa.Column(sa.Integer, primary_key=True)
+    product_type = sa.Column(sa.String(255))
+    appointment = sa.Column(sa.String(255))
+    brand = sa.Column(sa.String(255))
+
+    tovars = relationship('Tovar', back_populates='category')
+
+
 class Tovar(db.Model):
     __tablename__ = 'tovars'
     id = sa.Column(sa.Integer, primary_key=True)
@@ -42,3 +55,6 @@ class Tovar(db.Model):
     price = sa.Column(sa.Integer, nullable=False)
     is_active = sa.Column(sa.Boolean, default=True)
     ostatok = sa.Column(sa.Integer, default=0)
+
+    category_id = sa.Column(sa.Integer, sa.ForeignKey('categories.id'))
+    category = relationship('Categories', back_populates='tovars')
