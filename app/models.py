@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from main import db, login_manager
+from .main import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -44,7 +44,7 @@ class Categories(db.Model):
     appointment = sa.Column(sa.String(255))
     brand = sa.Column(sa.String(255))
 
-    tovars = relationship('Tovar', back_populates='category')
+    tovars = db.relationship('Tovar', back_populates='category', lazy='dynamic')
 
 
 class Tovar(db.Model):
